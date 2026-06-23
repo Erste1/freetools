@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Tip Calculator Online — Split Bills Easily | FreeTools</title>
+    <meta name="description" content="Free online tip calculator. Calculate tips and split bills easily.">
+    <meta name="keywords" content="tip calculator, bill splitter, restaurant tip, gratuity calculator, split bill">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="header"><div class="container header-inner"><a href="../" class="logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0071E3"/><stop offset="100%" stop-color="#5856D6"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#lg)"/><path d="M9 16L14 21L23 11" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>FreeTools</span></a><div class="header-actions"><div class="lang-switcher"><button class="lang-btn" id="langBtn"><span id="currentLang">EN</span></button></div></div></div></header>
+<main class="tool-page">
+    <div class="tool-header"><h1>Tip Calculator</h1><p>Calculate tips and split bills easily</p></div>
+    <div class="tool-container">
+        <div class="tool-panel" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div><label>Bill Amount</label><input type="number" id="bill" value="50" oninput="calc()"></div>
+            <div><label>Tip %</label><input type="number" id="tip" value="15" oninput="calc()"></div>
+            <div><label>People</label><input type="number" id="people" value="1" min="1" oninput="calc()"></div>
+        </div>
+        <div class="tool-panel" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;text-align:center">
+            <div style="padding:20px;background:rgba(255,255,255,0.05);border-radius:var(--radius-sm)"><div style="font-size:28px;font-weight:700;color:var(--green)" id="tipAmt">$7.50</div><div style="font-size:12px;color:var(--text-secondary)">Tip</div></div>
+            <div style="padding:20px;background:rgba(255,255,255,0.05);border-radius:var(--radius-sm)"><div style="font-size:28px;font-weight:700" id="total">$57.50</div><div style="font-size:12px;color:var(--text-secondary)">Total</div></div>
+            <div style="padding:20px;background:rgba(255,255,255,0.05);border-radius:var(--radius-sm)"><div style="font-size:28px;font-weight:700;color:var(--blue)" id="perPerson">$57.50</div><div style="font-size:12px;color:var(--text-secondary)">Per Person</div></div>
+        </div>
+    </div>
+</main>
+<script src="../js/app.js"></script>
+<script>
+function calc(){
+    const bill=parseFloat(document.getElementById('bill').value)||0;
+    const tipPct=parseFloat(document.getElementById('tip').value)||0;
+    const people=parseInt(document.getElementById('people').value)||1;
+    const tipAmt=bill*tipPct/100;
+    const total=bill+tipAmt;
+    const per=total/people;
+    document.getElementById('tipAmt').textContent='$'+tipAmt.toFixed(2);
+    document.getElementById('total').textContent='$'+total.toFixed(2);
+    document.getElementById('perPerson').textContent='$'+per.toFixed(2);
+}
+calc();
+</script>
+</body>
+</html>

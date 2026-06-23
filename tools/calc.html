@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Scientific Calculator Online | FreeTools</title>
+    <meta name="description" content="Free online scientific calculator with advanced math functions.">
+    <meta name="keywords" content="scientific calculator, math calculator, sin cos tan, logarithm, square root, online calculator">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>.calc-btn{padding:16px;border:1px solid var(--glass-border);border-radius:var(--radius-sm);background:var(--glass);color:var(--text);font-size:16px;cursor:pointer;transition:var(--transition);font-family:inherit}.calc-btn:hover{background:var(--glass-strong);border-color:var(--blue)}.calc-btn.op{background:rgba(0,113,227,0.2);color:var(--blue-light)}.calc-btn.eq{background:linear-gradient(135deg,var(--blue),var(--purple));color:white;font-weight:700}</style>
+</head>
+<body>
+<header class="header"><div class="container header-inner"><a href="../" class="logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0071E3"/><stop offset="100%" stop-color="#5856D6"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#lg)"/><path d="M9 16L14 21L23 11" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>FreeTools</span></a><div class="header-actions"><div class="lang-switcher"><button class="lang-btn" id="langBtn"><span id="currentLang">EN</span></button></div></div></div></header>
+<main class="tool-page">
+    <div class="tool-header"><h1>Scientific Calculator</h1><p>Advanced math functions</p></div>
+    <div class="tool-container" style="max-width:400px">
+        <div class="tool-panel"><input type="text" id="display" value="0" readonly style="text-align:right;font-size:32px;font-weight:700;font-family:monospace"></div>
+        <div class="tool-panel" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+            <button class="calc-btn op" onclick="fn('sin')">sin</button><button class="calc-btn op" onclick="fn('cos')">cos</button><button class="calc-btn op" onclick="fn('tan')">tan</button><button class="calc-btn op" onclick="fn('log')">log</button>
+            <button class="calc-btn op" onclick="fn('sqrt')">√</button><button class="calc-btn op" onclick="fn('pow')">x²</button><button class="calc-btn op" onclick="fn('pi')">π</button><button class="calc-btn op" onclick="fn('e')">e</button>
+            <button class="calc-btn" onclick="clearDisp()">C</button><button class="calc-btn" onclick="backspace()">⌫</button><button class="calc-btn" onclick="input('(')">(</button><button class="calc-btn" onclick="input(')')">)</button>
+            <button class="calc-btn" onclick="input('7')">7</button><button class="calc-btn" onclick="input('8')">8</button><button class="calc-btn" onclick="input('9')">9</button><button class="calc-btn op" onclick="input('/')">÷</button>
+            <button class="calc-btn" onclick="input('4')">4</button><button class="calc-btn" onclick="input('5')">5</button><button class="calc-btn" onclick="input('6')">6</button><button class="calc-btn op" onclick="input('*')">×</button>
+            <button class="calc-btn" onclick="input('1')">1</button><button class="calc-btn" onclick="input('2')">2</button><button class="calc-btn" onclick="input('3')">3</button><button class="calc-btn op" onclick="input('-')">−</button>
+            <button class="calc-btn" onclick="input('0')">0</button><button class="calc-btn" onclick="input('.')">.</button><button class="calc-btn eq" onclick="calculate()">=</button><button class="calc-btn op" onclick="input('+')">+</button>
+        </div>
+    </div>
+</main>
+<script src="../js/app.js"></script>
+<script>
+let expr='';
+function input(v){const d=document.getElementById('display');if(d.value==='0'&&v!=='.')d.value='';d.value+=v;expr=d.value}
+function clearDisp(){document.getElementById('display').value='0';expr=''}
+function backspace(){const d=document.getElementById('display');d.value=d.value.slice(0,-1)||'0';expr=d.value}
+function fn(f){const d=document.getElementById('display');const v=parseFloat(d.value);let r;switch(f){case'sin':r=Math.sin(v*Math.PI/180);break;case'cos':r=Math.cos(v*Math.PI/180);break;case'tan':r=Math.tan(v*Math.PI/180);break;case'log':r=Math.log10(v);break;case'sqrt':r=Math.sqrt(v);break;case'pow':r=v*v;break;case'pi':r=Math.PI;break;case'e':r=Math.E;break}d.value=r;expr=r}
+function calculate(){try{const d=document.getElementById('display');d.value=eval(d.value);expr=d.value}catch(e){document.getElementById('display').value='Error'}}
+</script>
+</body>
+</html>

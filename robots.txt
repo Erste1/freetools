@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://erste1.github.io/freetools/sitemap.xml

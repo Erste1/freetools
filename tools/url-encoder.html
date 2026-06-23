@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free URL Encoder Online — Encode & Decode URLs | FreeTools</title>
+    <meta name="description" content="Free online URL encoder and decoder. Encode and decode URLs instantly.">
+    <meta name="keywords" content="URL encoder, URL decoder, encode URL, decode URL, percent encoding, URL encoding tool">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="header"><div class="container header-inner"><a href="../" class="logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0071E3"/><stop offset="100%" stop-color="#5856D6"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#lg)"/><path d="M9 16L14 21L23 11" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>FreeTools</span></a><div class="header-actions"><div class="lang-switcher"><button class="lang-btn" id="langBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span id="currentLang">EN</span></button><div class="lang-dropdown" id="langDropdown"><button data-lang="en">English</button><button data-lang="ru">Русский</button><button data-lang="es">Español</button><button data-lang="de">Deutsch</button><button data-lang="fr">Français</button><button data-lang="pt">Português</button><button data-lang="ja">日本語</button><button data-lang="zh">中文</button><button data-lang="ko">한국어</button><button data-lang="ar">العربية</button></div></div></div></div></header>
+<main class="tool-page">
+    <div class="tool-header"><h1>URL Encoder / Decoder</h1><p>Encode and decode URLs and query strings</p></div>
+    <div class="tool-container">
+        <div class="tool-panel"><label>Input</label><textarea id="input" placeholder="https://example.com/path?q=hello world&lang=en"></textarea></div>
+        <div class="tool-panel"><div class="btn-group"><button class="btn btn-primary" onclick="encode()">Encode →</button><button class="btn btn-primary" onclick="decode()">← Decode</button><button class="btn btn-secondary" onclick="copyOut()">Copy</button></div></div>
+        <div class="tool-panel"><label>Output</label><div class="output-area" id="output"></div></div>
+    </div>
+</main>
+<script src="../js/app.js"></script>
+<script>
+function encode(){document.getElementById('output').textContent=encodeURIComponent(document.getElementById('input').value)}
+function decode(){try{document.getElementById('output').textContent=decodeURIComponent(document.getElementById('input').value)}catch(e){document.getElementById('output').textContent='Error: '+e.message}}
+function copyOut(){navigator.clipboard.writeText(document.getElementById('output').textContent)}
+</script>
+</body>
+</html>

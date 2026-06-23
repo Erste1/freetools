@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Stopwatch Online — Precise Timing | FreeTools</title>
+    <meta name="description" content="Free online stopwatch. Precise timing with lap recording.">
+    <meta name="keywords" content="stopwatch, timer, lap timer, online stopwatch, precise timer">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="header"><div class="container header-inner"><a href="../" class="logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0071E3"/><stop offset="100%" stop-color="#5856D6"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#lg)"/><path d="M9 16L14 21L23 11" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>FreeTools</span></a><div class="header-actions"><div class="lang-switcher"><button class="lang-btn" id="langBtn"><span id="currentLang">EN</span></button></div></div></div></header>
+<main class="tool-page">
+    <div class="tool-header"><h1>Stopwatch</h1><p>Precise timing with lap recording</p></div>
+    <div class="tool-container">
+        <div class="tool-panel" style="text-align:center">
+            <div id="display" style="font-size:72px;font-weight:800;font-variant-numeric:tabular-nums;margin:20px 0">00:00.00</div>
+            <div class="btn-group" style="justify-content:center">
+                <button class="btn btn-primary" id="startBtn" onclick="toggle()">Start</button>
+                <button class="btn btn-secondary" id="lapBtn" onclick="lap()" disabled>Lap</button>
+                <button class="btn btn-secondary" onclick="reset()">Reset</button>
+            </div>
+        </div>
+        <div class="tool-panel"><label>Laps</label><div id="laps" class="output-area" style="max-height:200px"></div></div>
+    </div>
+</main>
+<script src="../js/app.js"></script>
+<script>
+let interval, ms=0, running=false, lastLap=0;
+function updateDisplay(){const m=Math.floor(ms/60000);const s=Math.floor((ms%60000)/1000);const c=Math.floor((ms%1000)/10);document.getElementById('display').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}.${String(c).padStart(2,'0')}`}
+function toggle(){if(running){clearInterval(interval);running=false;document.getElementById('startBtn').textContent='Start';document.getElementById('lapBtn').disabled=true}else{running=true;document.getElementById('startBtn').textContent='Pause';document.getElementById('lapBtn').disabled=false;interval=setInterval(()=>{ms++;updateDisplay()},10)}
+}
+function lap(){if(!running)return;const lapMs=ms-lastLap;lastLap=ms;const m=Math.floor(lapMs/60000);const s=Math.floor((lapMs%60000)/1000);const c=Math.floor((lapMs%1000)/10);const t=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}.${String(c).padStart(2,'0')}`;document.getElementById('laps').innerHTML=`Lap ${document.getElementById('laps').children.length+1}: ${t}<br>`+document.getElementById('laps').innerHTML}
+function reset(){clearInterval(interval);running=false;ms=0;lastLap=0;document.getElementById('startBtn').textContent='Start';document.getElementById('lapBtn').disabled=true;document.getElementById('laps').innerHTML='';updateDisplay()}
+</script>
+</body>
+</html>

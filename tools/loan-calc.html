@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Loan Calculator Online — Monthly Payments | FreeTools</title>
+    <meta name="description" content="Free online loan calculator. Calculate monthly payments and total interest.">
+    <meta name="keywords" content="loan calculator, mortgage calculator, monthly payment, interest calculator, EMI calculator">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="header"><div class="container header-inner"><a href="../" class="logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0071E3"/><stop offset="100%" stop-color="#5856D6"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#lg)"/><path d="M9 16L14 21L23 11" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>FreeTools</span></a><div class="header-actions"><div class="lang-switcher"><button class="lang-btn" id="langBtn"><span id="currentLang">EN</span></button></div></div></div></header>
+<main class="tool-page">
+    <div class="tool-header"><h1>Loan Calculator</h1><p>Calculate monthly payments and total interest</p></div>
+    <div class="tool-container">
+        <div class="tool-panel" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div><label>Loan Amount ($)</label><input type="number" id="amount" value="100000" oninput="calc()"></div>
+            <div><label>Interest Rate (%)</label><input type="number" id="rate" value="5" step="0.1" oninput="calc()"></div>
+            <div><label>Loan Term (years)</label><input type="number" id="years" value="30" oninput="calc()"></div>
+        </div>
+        <div class="tool-panel" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;text-align:center">
+            <div style="padding:20px;background:rgba(255,255,255,0.05);border-radius:var(--radius-sm)"><div style="font-size:28px;font-weight:700;color:var(--blue)" id="monthly">$536.82</div><div style="font-size:12px;color:var(--text-secondary)">Monthly Payment</div></div>
+            <div style="padding:20px;background:rgba(255,255,255,0.05);border-radius:var(--radius-sm)"><div style="font-size:28px;font-weight:700;color:var(--orange)" id="totalInterest">$93,255.78</div><div style="font-size:12px;color:var(--text-secondary)">Total Interest</div></div>
+            <div style="padding:20px;background:rgba(255,255,255,0.05);border-radius:var(--radius-sm)"><div style="font-size:28px;font-weight:700;color:var(--green)" id="totalPayment">$193,255.78</div><div style="font-size:12px;color:var(--text-secondary)">Total Payment</div></div>
+        </div>
+    </div>
+</main>
+<script src="../js/app.js"></script>
+<script>
+function calc(){
+    const P=parseFloat(document.getElementById('amount').value)||0;
+    const r=parseFloat(document.getElementById('rate').value)/100/12||0;
+    const n=parseInt(document.getElementById('years').value)*12||1;
+    const M=r>0?P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):P/n;
+    const total=M*n;
+    const interest=total-P;
+    document.getElementById('monthly').textContent='$'+M.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+    document.getElementById('totalInterest').textContent='$'+interest.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+    document.getElementById('totalPayment').textContent='$'+total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+}
+calc();
+</script>
+</body>
+</html>
