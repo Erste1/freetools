@@ -255,18 +255,56 @@ body::before {
     transition: var(--transition);
 }
 
-/* ============ Ad Banner ============ */
-.ad-banner {
+/* ============ Visitor Counter ============ */
+.visitor-counter {
     margin-top: 72px;
     margin-bottom: 8px;
-    padding: 12px 24px;
-    background: linear-gradient(135deg, rgba(0, 113, 227, 0.1), rgba(88, 86, 214, 0.1));
+    padding: 8px 16px;
+    background: var(--glass);
     border: 1px solid var(--glass-border);
+    border-radius: 100px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    backdrop-filter: blur(10px);
+}
+
+.counter-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.4); }
+    50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(52, 199, 89, 0); }
+}
+
+#visitorCount {
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* ============ Ad Banner ============ */
+.ad-banner {
+    margin-bottom: 8px;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, rgba(0, 113, 227, 0.05), rgba(88, 86, 214, 0.05));
+    border: 1px dashed var(--glass-border);
     border-radius: var(--radius-sm);
     text-align: center;
     font-size: 12px;
     color: var(--text-tertiary);
-    min-height: 60px;
+    min-height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
