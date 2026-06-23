@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex Tester — FreeTools</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="header"><div class="container header-inner"><a href="../" class="logo"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="7" fill="#0071E3"/><path d="M8 14L12 18L20 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>FreeTools</span></a><div class="header-actions"><div class="lang-switcher"><button class="lang-btn" id="langBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span id="currentLang">EN</span></button><div class="lang-dropdown" id="langDropdown"><button data-lang="en">English</button><button data-lang="ru">Русский</button><button data-lang="es">Español</button><button data-lang="de">Deutsch</button><button data-lang="fr">Français</button><button data-lang="pt">Português</button><button data-lang="ja">日本語</button><button data-lang="zh">中文</button><button data-lang="ko">한국어</button><button data-lang="ar">العربية</button></div></div></div></div></header>
+<main class="tool-page">
+    <div class="tool-header"><h1>Regex Tester</h1><p>Test regular expressions in real time</p></div>
+    <div class="tool-container">
+        <div class="tool-panel"><label>Regex Pattern</label><input type="text" id="pattern" placeholder="e.g., \b\w+@\w+\.\w+\b" value="\b\w+@\w+\.\w+\b"></div>
+        <div class="tool-panel"><label>Test String</label><textarea id="testStr" placeholder="Enter text to test against...">Hello, contact us at support@example.com or sales@test.org</textarea></div>
+        <div class="tool-panel">
+            <label>Matches</label>
+            <div class="output-area" id="output" style="white-space:pre-wrap"></div>
+        </div>
+    </div>
+</main>
+<script src="../js/app.js"></script>
+<script>
+function testRegex() {
+    const pattern = document.getElementById('pattern').value;
+    const text = document.getElementById('testStr').value;
+    try {
+        const regex = new RegExp(pattern, 'gi');
+        const matches = [...text.matchAll(regex)];
+        if (matches.length === 0) {
+            document.getElementById('output').textContent = 'No matches found';
+            return;
+        }
+        let result = `Found ${matches.length} match(es):\n\n`;
+        matches.forEach((m, i) => {
+            result += `${i + 1}. "${m[0]}" at position ${m.index}\n`;
+        });
+        document.getElementById('output').textContent = result;
+    } catch(e) {
+        document.getElementById('output').textContent = 'Error: ' + e.message;
+    }
+}
+
+document.getElementById('pattern').addEventListener('input', testRegex);
+document.getElementById('testStr').addEventListener('input', testRegex);
+testRegex();
+</script>
+</body>
+</html>

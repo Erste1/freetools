@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorem Ipsum Generator — FreeTools</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="header"><div class="container header-inner"><a href="../" class="logo"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="7" fill="#0071E3"/><path d="M8 14L12 18L20 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>FreeTools</span></a><div class="header-actions"><div class="lang-switcher"><button class="lang-btn" id="langBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span id="currentLang">EN</span></button><div class="lang-dropdown" id="langDropdown"><button data-lang="en">English</button><button data-lang="ru">Русский</button><button data-lang="es">Español</button><button data-lang="de">Deutsch</button><button data-lang="fr">Français</button><button data-lang="pt">Português</button><button data-lang="ja">日本語</button><button data-lang="zh">中文</button><button data-lang="ko">한국어</button><button data-lang="ar">العربية</button></div></div></div></div></header>
+<main class="tool-page">
+    <div class="tool-header"><h1>Lorem Ipsum Generator</h1><p>Generate placeholder text for your designs</p></div>
+    <div class="tool-container">
+        <div class="tool-panel" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+            <div><label>Paragraphs</label><input type="number" id="paragraphs" value="3" min="1" max="20"></div>
+            <div><label>Min Words/Sentence</label><input type="number" id="minWords" value="5" min="3" max="15"></div>
+            <div><label>Max Words/Sentence</label><input type="number" id="maxWords" value="15" min="5" max="30"></div>
+        </div>
+        <div class="tool-panel"><div class="btn-group"><button class="btn btn-primary" onclick="generate()">Generate</button></div></div>
+        <div class="tool-panel"><label>Output</label><div class="output-area" id="output" style="min-height:200px"></div><div class="btn-group"><button class="btn btn-secondary" onclick="navigator.clipboard.writeText(document.getElementById('output').textContent)">Copy</button></div></div>
+    </div>
+</main>
+<script src="../js/app.js"></script>
+<script>
+const words = ['lorem','ipsum','dolor','sit','amet','consectetur','adipiscing','elit','sed','do','eiusmod','tempor','incididunt','ut','labore','et','dolore','magna','aliqua','enim','ad','minim','veniam','quis','nostrud','exercitation','ullamco','laboris','nisi','aliquip','ex','ea','commodo','consequat','duis','aute','irure','in','reprehenderit','voluptate','velit','esse','cillum','fugiat','nulla','pariatur','excepteur','sint','occaecat','cupidatat','non','proident','sunt','culpa','qui','officia','deserunt','mollit','anim','id','est','laborum'];
+
+function rand(min,max) { return Math.floor(Math.random()*(max-min+1))+min; }
+function sentence(minW,maxW) {
+    let s = [];
+    const len = rand(minW,maxW);
+    for(let i=0;i<len;i++) s.push(words[rand(0,words.length-1)]);
+    s[0] = s[0][0].toUpperCase() + s[0].slice(1);
+    return s.join(' ') + '.';
+}
+
+function generate() {
+    const p = parseInt(document.getElementById('paragraphs').value);
+    const minW = parseInt(document.getElementById('minWords').value);
+    const maxW = parseInt(document.getElementById('maxWords').value);
+    let text = [];
+    for(let i=0;i<p;i++) {
+        const sentences = rand(3,7);
+        let para = [];
+        for(let j=0;j<sentences;j++) para.push(sentence(minW,maxW));
+        text.push(para.join(' '));
+    }
+    document.getElementById('output').textContent = text.join('\n\n');
+}
+generate();
+</script>
+</body>
+</html>
