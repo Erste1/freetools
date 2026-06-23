@@ -728,7 +728,11 @@ function initVisitorCounter() {
 
     // Get or initialize today's count
     const today = new Date().toDateString();
-    const stored = localStorage.getItem('freetools_visitors');
+    let stored = null;
+    try {
+        stored = localStorage.getItem('freetools_visitors');
+    } catch(e) {}
+    
     let data = stored ? JSON.parse(stored) : { date: '', count: 0 };
 
     if (data.date !== today) {
@@ -737,13 +741,15 @@ function initVisitorCounter() {
 
     // Increment count
     data.count++;
-    localStorage.setItem('freetools_visitors', JSON.stringify(data));
+    try {
+        localStorage.setItem('freetools_visitors', JSON.stringify(data));
+    } catch(e) {}
 
     // Display with animation
     let current = 0;
     const target = data.count;
     const duration = 1000;
-    const step = target / (duration / 16);
+    const step = Math.max(1, target / (duration / 16));
 
     function animate() {
         current += step;
@@ -758,7 +764,11 @@ function initVisitorCounter() {
 }
 
 // Init counter on page load
-document.addEventListener('DOMContentLoaded', initVisitorCounter);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initVisitorCounter);
+} else {
+    initVisitorCounter();
+}
 
 // Export for tool pages
 window.freetools = { t, translations, currentLang: () => currentLang };
